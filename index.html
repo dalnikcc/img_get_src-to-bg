@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>about</title>
+</head>
+<body>
+	
+	<ul class="custom-dots">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+		<script>
+		(function($) {
+			//new array with src to slick dot-images 
+			var _images = [
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/email.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/email.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				},
+				{
+					"normal": "images/Heart.png",
+				}
+			];
+
+			for (var i = 0; i < _images.length; i++) {
+				var link = _images[i].normal; //get normal image
+				var ext = link.split('.').pop(); // get extention
+
+				var linkHover =   link.substring(0, link.length - 4); // cut extention from normal image
+				_images[i].hover = linkHover + '-hover.' + ext; // create a new image with '-hover' name + extention
+			}
+
+			$('.custom-dots li').each(function(i, e) {
+				var img = new Image();
+
+				img.src = _images[i].normal; //create new img tag in each li with src to normal image
+				img.slickData = _images[i]; //create new object in img
+
+				img.setHover = function(e) { // function setHover
+					this.src = this.slickData.hover;
+				};
+				img.removeHover = function(e) { // function removeHover
+					this.src = this.slickData.normal;
+				};
+
+				$(img).on('mouseenter', function(e) {
+					e.currentTarget.setHover();
+				});
+				$(img).on('mouseleave', function(e) {
+					e.currentTarget.removeHover();
+				});
+
+				$(e).append(img);
+			});
+		})(jQuery)
+	</script>
+</body>
+</html>
